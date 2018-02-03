@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">JCOOK-SubBook</string>
+    <string name="subscriptions">Subscriptions:</string>
+    <string name="add_sub">Add Subscription</string>
+</resources>
