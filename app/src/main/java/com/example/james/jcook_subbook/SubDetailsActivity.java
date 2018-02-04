@@ -76,17 +76,7 @@ public class SubDetailsActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Create the proper intent, then return to the main activity
-                Intent intent = new Intent();
-                intent.putExtra(EXTRA_NAME, fieldSubName.getText().toString());
-
-                Long millisecs = getLongFromDateString(fieldSubDate.getText().toString());
-                intent.putExtra(EXTRA_DATE, millisecs);
-
-                intent.putExtra(EXTRA_COST, Float.parseFloat(fieldSubCost.getText().toString()));
-                intent.putExtra(EXTRA_COMMENT, fieldSubComment.getText().toString());
-                setResult(RESULT_OK, intent);
-                finish();
+            saveBtnOnClickBehavior();
             }
         });
     }
@@ -123,5 +113,22 @@ public class SubDetailsActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return millisecs;
+    }
+
+    /**
+     * Defines behavior for a clicked save button.
+     */
+    private void saveBtnOnClickBehavior(){
+        //Create the proper intent, then return to the main activity
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_NAME, fieldSubName.getText().toString());
+
+        Long millisecs = getLongFromDateString(fieldSubDate.getText().toString());
+        intent.putExtra(EXTRA_DATE, millisecs);
+
+        intent.putExtra(EXTRA_COST, Float.parseFloat(fieldSubCost.getText().toString()));
+        intent.putExtra(EXTRA_COMMENT, fieldSubComment.getText().toString());
+        setResult(RESULT_OK, intent);
+        finish();
     }
 }

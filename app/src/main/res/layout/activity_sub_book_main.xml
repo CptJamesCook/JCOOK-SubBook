@@ -33,12 +33,10 @@
         android:id="@+id/addSub"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/add_sub"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textCostDesc" />
@@ -63,5 +61,20 @@
         android:textAlignment="viewEnd"
         app:layout_constraintEnd_toStartOf="@+id/textCostNum"
         app:layout_constraintTop_toBottomOf="@+id/currSubs" />
+
+    <Button
+        android:id="@+id/deleteSubs"
+        android:layout_width="349dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/delete_all_subs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addSub" />
 
 </android.support.constraint.ConstraintLayout>

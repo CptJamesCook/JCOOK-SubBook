@@ -68,6 +68,7 @@ public class SubBookMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sub_book_main);
 
         Button addSubBtn = findViewById(R.id.addSub);
+        Button deleteSubsBtn = findViewById(R.id.deleteSubs);
         currSubsList = findViewById(R.id.currSubs);
 
         //define behavior for the add subscriptions button
@@ -77,6 +78,18 @@ public class SubBookMainActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
                 BasicSubscription sub = new BasicSubscription();
                 openSubDetailsActivity(sub);
+            }
+        });
+
+        //define behavior for the delete all subscriptions button
+        //in the future, make it so it pops up a window asking if you're sure
+        deleteSubsBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_OK);
+                sublist.clear();
+                adapter.notifyDataSetChanged();
+                saveInFile();
             }
         });
 
