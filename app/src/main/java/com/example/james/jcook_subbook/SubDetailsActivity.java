@@ -1,3 +1,13 @@
+/*
+ * Copyright 2018 James Cook
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package com.example.james.jcook_subbook;
 
 import android.content.Intent;
@@ -11,12 +21,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The subscription details activity.
+ *
+ * Responsible for modifying the opened subscriptions.
+ * @author James Cook
+ * @version 0.0
+ */
 public class SubDetailsActivity extends AppCompatActivity {
-
-    public static final String EXTRA_NAME = "com.example.james.jcook_subbook.NAME";
-    public static final String EXTRA_DATE = "com.example.james.jcook_subbook.DATE";
-    public static final String EXTRA_COST = "com.example.james.jcook_subbook.COST";
-    public static final String EXTRA_COMMENT = "com.example.james.jcook_subbook.COMMENT";
 
     private EditText fieldSubName;
     private EditText fieldSubDate;
@@ -25,15 +37,25 @@ public class SubDetailsActivity extends AppCompatActivity {
 
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-mm-dd");
 
+    public static final String EXTRA_NAME = "com.example.james.jcook_subbook.NAME";
+    public static final String EXTRA_DATE = "com.example.james.jcook_subbook.DATE";
+    public static final String EXTRA_COST = "com.example.james.jcook_subbook.COST";
+    public static final String EXTRA_COMMENT = "com.example.james.jcook_subbook.COMMENT";
+
+    /**
+     * Constructs the activity.
+     *
+     * @param savedInstanceState The previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_details);
 
-        //Initialize Button's
+        //Initialize Buttons
         Button saveBtn = findViewById(R.id.saveButton);
 
-        //Initialize EditText's
+        //Initialize EditTexts
         fieldSubName = findViewById(R.id.SubName);
         fieldSubDate = findViewById(R.id.SubDate);
         fieldSubCost = findViewById(R.id.SubCost);
@@ -50,6 +72,7 @@ public class SubDetailsActivity extends AppCompatActivity {
         //populate activity with subs details
         populateActivityFields(subName, subDate, subCost, subComment);
 
+        //define on click behavior for the save button
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +91,14 @@ public class SubDetailsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Populates the appropriate fields with subscription details.
+     *
+     * @param subName the subscription name
+     * @param subDate the subscription date
+     * @param subCost the subscription cost
+     * @param subComment the subscription comment
+     */
     private void populateActivityFields(String subName, Date subDate,
                                         float subCost, String subComment){
         fieldSubName.setText(subName);
@@ -76,6 +107,12 @@ public class SubDetailsActivity extends AppCompatActivity {
         fieldSubComment.setText(subComment);
     }
 
+    /**
+     * Coverts a date string into a long.
+     *
+     * @param dateStr date string to be converted
+     * @return A long number representing time from epoc to date string.
+     */
     private Long getLongFromDateString(String dateStr){
         // process dateStr into a Long representation  of millisecs
         Long millisecs = 1517616000021L; // default in case of failure
