@@ -1,3 +1,14 @@
+
+/*
+ * Copyright 2018 James Cook
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package com.example.james.jcook_subbook;
 
 import android.content.Context;
@@ -26,13 +37,15 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * The main activity of the app.
+ *
+ * @author James Cook
+ * @version 0.0
+ */
 public class SubBookMainActivity extends AppCompatActivity {
-    public static final String EXTRA_NAME = "com.example.james.jcook_subbook.NAME";
-    public static final String EXTRA_DATE = "com.example.james.jcook_subbook.DATE";
-    public static final String EXTRA_COST = "com.example.james.jcook_subbook.COST";
-    public static final String EXTRA_COMMENT = "com.example.james.jcook_subbook.COMMENT";
 
-    private static final String FILENAME = "newFile.sav";
+    private static final String FILENAME = "newfile.sav";
     private ListView currSubsList;
 
     private ArrayList<BasicSubscription> sublist;
@@ -40,6 +53,16 @@ public class SubBookMainActivity extends AppCompatActivity {
 
     private static final int SELECTOR_CONST = 1;
 
+    public static final String EXTRA_NAME = "com.example.james.jcook_subbook.NAME";
+    public static final String EXTRA_DATE = "com.example.james.jcook_subbook.DATE";
+    public static final String EXTRA_COST = "com.example.james.jcook_subbook.COST";
+    public static final String EXTRA_COMMENT = "com.example.james.jcook_subbook.COMMENT";
+
+    /**
+     * Constructs the activity.
+     *
+     * @param savedInstanceState The previously saved state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +91,9 @@ public class SubBookMainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Behavior on start up.
+     */
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
@@ -78,6 +104,9 @@ public class SubBookMainActivity extends AppCompatActivity {
         currSubsList.setAdapter(adapter);
     }
 
+    /**
+     * Load previous state from a file.
+     */
     private void loadFromFile() {
 
         try {
@@ -99,6 +128,9 @@ public class SubBookMainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Save state in a file.
+     */
     private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME,
@@ -120,6 +152,11 @@ public class SubBookMainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Open the Subscription Details Activity.
+     *
+     * @param sub The BasicSubscription object wanting to be modified (either blank or existing).
+     */
     private void openSubDetailsActivity(BasicSubscription sub){
         Intent intent = new Intent(this, SubDetailsActivity.class);
         intent.putExtra(EXTRA_NAME, sub.getName());
@@ -129,6 +166,13 @@ public class SubBookMainActivity extends AppCompatActivity {
         startActivityForResult(intent, SELECTOR_CONST);
     }
 
+    /**
+     * Define behavior for when an activity returns to the main activity.
+     *
+     * @param requestCode An integer representing the state of the request.
+     * @param resultCode An integer representing the state of the activity coming back.
+     * @param data The Intent that came from the previous activity.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         switch(requestCode){
@@ -152,6 +196,9 @@ public class SubBookMainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Define behavior for the destruction of the activity.
+     */
     protected void onDestroy(){
 		super.onDestroy();
 		Log.i("In Destroy method","The app is closing");
