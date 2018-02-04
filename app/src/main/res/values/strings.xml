@@ -2,4 +2,12 @@
     <string name="app_name">JCOOK-SubBook</string>
     <string name="subscriptions">Subscriptions:</string>
     <string name="add_sub">Add Subscription</string>
+    <string name="date">Date (yyyy-mm-dd):</string>
+    <string name="sub_name">Subscription Name:</string>
+    <string name="comment">Comment</string>
+    <string name="cost">Cost per Payment:</string>
+    <string name="default_sub_name">BasicSubscription</string>
+    <string name="total_cost_string">Total Cost:</string>
+    <string name="total_cost_num">0</string>
+    <string name="default_date">2017-05-05</string>
 </resources>
