@@ -52,6 +52,7 @@ public class SubBookMainActivity extends AppCompatActivity {
 
     private static final int SELECTOR_CONST = 1;
 
+    public static final String EXTRA_INDEX = "com.example.james.jcook_subbook.INDEX";
     public static final String EXTRA_NAME = "com.example.james.jcook_subbook.NAME";
     public static final String EXTRA_DATE = "com.example.james.jcook_subbook.DATE";
     public static final String EXTRA_COST = "com.example.james.jcook_subbook.COST";
@@ -77,7 +78,8 @@ public class SubBookMainActivity extends AppCompatActivity {
             public void onClick(View v){
                 setResult(RESULT_OK);
                 BasicSubscription sub = new BasicSubscription();
-                openSubDetailsActivity(sub);
+                int index = sublist.size();
+                openSubDetailsActivity(sub, index);
             }
         });
 
@@ -98,7 +100,7 @@ public class SubBookMainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 BasicSubscription entry = (BasicSubscription) parent.getItemAtPosition(position);
-                openSubDetailsActivity(entry);
+                openSubDetailsActivity(entry, position);
             }
         });
     }
@@ -168,9 +170,11 @@ public class SubBookMainActivity extends AppCompatActivity {
      * Open the Subscription Details Activity.
      *
      * @param sub The BasicSubscription object wanting to be modified (either blank or existing).
+     * @param index The index the sub occupies within sublist.
      */
-    private void openSubDetailsActivity(BasicSubscription sub){
+    private void openSubDetailsActivity(BasicSubscription sub, int index){
         Intent intent = new Intent(this, SubDetailsActivity.class);
+        intent.putExtra(EXTRA_INDEX, index);
         intent.putExtra(EXTRA_NAME, sub.getName());
         intent.putExtra(EXTRA_DATE, sub.getDate().getTime());
         intent.putExtra(EXTRA_COST, sub.getCost());
@@ -193,6 +197,7 @@ public class SubBookMainActivity extends AppCompatActivity {
                     //get the sub data from intent
                     //Get info from bundle
                     Bundle bundle = data.getExtras();
+                    int subIndex = bundle.getInt(EXTRA_INDEX);
                     String subName = bundle.getString(EXTRA_NAME);
                     Long timeInMilli = bundle.getLong(EXTRA_DATE);
                     Date subDate = new Date(timeInMilli);
@@ -201,7 +206,12 @@ public class SubBookMainActivity extends AppCompatActivity {
 
                     BasicSubscription sub = new BasicSubscription(subName, subDate,
                                                                   subCost, subComment);
-                    sublist.add(sub);
+                    //if subIndex is less than the sub size, it previously
+                    // existed and needs to be deleted before being updated.
+                    if (subIndex < sublist.size()){
+                        sublist.remove(subIndex);
+                    }
+                    sublist.add(subIndex, sub);
                     adapter.notifyDataSetChanged();
                     saveInFile();
                 }

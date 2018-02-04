@@ -35,8 +35,11 @@ public class SubDetailsActivity extends AppCompatActivity {
     private EditText fieldSubCost;
     private EditText fieldSubComment;
 
+    private int subIndex;
+
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-mm-dd");
 
+    public static final String EXTRA_INDEX = "com.example.james.jcook_subbook.INDEX";
     public static final String EXTRA_NAME = "com.example.james.jcook_subbook.NAME";
     public static final String EXTRA_DATE = "com.example.james.jcook_subbook.DATE";
     public static final String EXTRA_COST = "com.example.james.jcook_subbook.COST";
@@ -63,6 +66,7 @@ public class SubDetailsActivity extends AppCompatActivity {
 
         //Get info from bundle
         Bundle bundle = getIntent().getExtras();
+        subIndex = bundle.getInt(EXTRA_INDEX);
         String subName = bundle.getString(EXTRA_NAME);
         Long timeInMilli = bundle.getLong(EXTRA_DATE);
         Date subDate = new Date(timeInMilli);
@@ -121,6 +125,7 @@ public class SubDetailsActivity extends AppCompatActivity {
     private void saveBtnOnClickBehavior(){
         //Create the proper intent, then return to the main activity
         Intent intent = new Intent();
+        intent.putExtra(EXTRA_INDEX, subIndex);
         intent.putExtra(EXTRA_NAME, fieldSubName.getText().toString());
 
         Long millisecs = getLongFromDateString(fieldSubDate.getText().toString());
