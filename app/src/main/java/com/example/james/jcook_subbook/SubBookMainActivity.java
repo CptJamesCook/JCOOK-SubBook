@@ -45,7 +45,7 @@ import java.util.Date;
  */
 public class SubBookMainActivity extends AppCompatActivity {
 
-    private static final String FILENAME = "savefile.sav";
+    private static final String FILENAME = "Savefile.sav";
     private ListView currSubsList;
 
     private ArrayList<BasicSubscription> sublist;

@@ -25,9 +25,6 @@ public class BasicSubscription {
     @Expose
     private String comment;
 
-    @Expose
-    private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-mm-dd");
-
     /**
      * Constructs a subscription with default values.
      */
@@ -132,8 +129,9 @@ public class BasicSubscription {
      */
     @Override
     public String toString(){
-        return this.name;
-                //+ ", Date: " + dateFormatter.format(this.date)
-                //+ ", Cost: " + String.valueOf(this.cost);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-mm-dd");
+        return this.name
+                + ", Date: " + dateFormatter.format(this.date)
+                + ", Cost: " + String.valueOf(this.cost);
     }
 }
