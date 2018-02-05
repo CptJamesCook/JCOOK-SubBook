@@ -19,7 +19,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -69,8 +72,11 @@ public class SubBookMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_book_main);
 
+        //Initialize buttons
         Button addSubBtn = findViewById(R.id.addSub);
         Button deleteSubsBtn = findViewById(R.id.deleteSubs);
+
+        //initialize currSubList
         currSubsList = findViewById(R.id.currSubs);
 
         //define behavior for the add subscriptions button
@@ -91,6 +97,7 @@ public class SubBookMainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 setResult(RESULT_OK);
                 sublist.clear();
+                updateTotalCost();
                 adapter.notifyDataSetChanged();
                 saveInFile();
             }
@@ -104,6 +111,7 @@ public class SubBookMainActivity extends AppCompatActivity {
                 openSubDetailsActivity(entry, position);
             }
         });
+        updateTotalCost();
     }
 
     /**
@@ -117,6 +125,7 @@ public class SubBookMainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<BasicSubscription>(this,
                                                        R.layout.list_item, sublist);
         currSubsList.setAdapter(adapter);
+        updateTotalCost();
     }
 
     /**
@@ -217,18 +226,36 @@ public class SubBookMainActivity extends AppCompatActivity {
                         BasicSubscription sub = new BasicSubscription(subName, subDate,
                                 subCost, subComment);
                         //if subIndex is less than the sub size, it previously
-                        // existed and needs to be deleted before being updated.
+                        //existed and needs to be deleted before being updated.
                         if (subIndex < sublist.size()){
                             sublist.remove(subIndex);
                         }
                         sublist.add(subIndex, sub);
                     }
+                    updateTotalCost();
                     adapter.notifyDataSetChanged();
                     saveInFile();
                 }
         }
     }
 
+    /**
+     * Updates the total cost of all subscriptions
+     */
+    private void updateTotalCost(){
+        TextView totalCost = findViewById(R.id.textCostNum);
+        DecimalFormat moneyFormat = new DecimalFormat("$0.00");
+        if(sublist != null) {
+            float sum = 0;
+            for (BasicSubscription sub : sublist) {
+                sum += sub.getCost();
+            }
+            totalCost.setText(moneyFormat.format(sum));
+        }
+        else{
+            totalCost.setText(moneyFormat.format(0));
+        }
+    }
     /**
      * Define behavior for the destruction of the activity.
      */

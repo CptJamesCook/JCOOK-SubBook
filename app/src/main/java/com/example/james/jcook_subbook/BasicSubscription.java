@@ -12,6 +12,7 @@ package com.example.james.jcook_subbook;
 
 import com.google.gson.annotations.Expose;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -140,8 +141,9 @@ public class BasicSubscription {
     @Override
     public String toString(){
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        DecimalFormat money = new DecimalFormat("$0.00");
         return this.name
                 + ", Date: " + dateFormatter.format(this.date)
-                + ", Cost: " + String.valueOf(this.cost);
+                + ", Cost: " + String.valueOf(money.format(this.cost));
     }
 }
