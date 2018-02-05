@@ -40,6 +40,7 @@ public class SubDetailsActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-mm-dd");
 
     public static final String EXTRA_INDEX = "com.example.james.jcook_subbook.INDEX";
+    public static final String EXTRA_DEL = "com.example.james.jcook_subbook.DEL";
     public static final String EXTRA_NAME = "com.example.james.jcook_subbook.NAME";
     public static final String EXTRA_DATE = "com.example.james.jcook_subbook.DATE";
     public static final String EXTRA_COST = "com.example.james.jcook_subbook.COST";
@@ -57,6 +58,7 @@ public class SubDetailsActivity extends AppCompatActivity {
 
         //Initialize Buttons
         Button saveBtn = findViewById(R.id.saveButton);
+        Button delBtn = findViewById(R.id.deleteButton);
 
         //Initialize EditTexts
         fieldSubName = findViewById(R.id.SubName);
@@ -80,7 +82,15 @@ public class SubDetailsActivity extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            saveBtnOnClickBehavior();
+                saveBtnOnClickBehavior();
+            }
+        });
+
+        //define on click behavior for the delete button
+        delBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delBtnOnClickBehavior();
             }
         });
     }
@@ -126,6 +136,7 @@ public class SubDetailsActivity extends AppCompatActivity {
         //Create the proper intent, then return to the main activity
         Intent intent = new Intent();
         intent.putExtra(EXTRA_INDEX, subIndex);
+        intent.putExtra(EXTRA_DEL, false);
         intent.putExtra(EXTRA_NAME, fieldSubName.getText().toString());
 
         Long millisecs = getLongFromDateString(fieldSubDate.getText().toString());
@@ -133,6 +144,17 @@ public class SubDetailsActivity extends AppCompatActivity {
 
         intent.putExtra(EXTRA_COST, Float.parseFloat(fieldSubCost.getText().toString()));
         intent.putExtra(EXTRA_COMMENT, fieldSubComment.getText().toString());
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    /**
+     * Defines behavior for a clicked delete button.
+     */
+    private void delBtnOnClickBehavior(){
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_INDEX, subIndex);
+        intent.putExtra(EXTRA_DEL, true);
         setResult(RESULT_OK, intent);
         finish();
     }

@@ -53,6 +53,7 @@ public class SubBookMainActivity extends AppCompatActivity {
     private static final int SELECTOR_CONST = 1;
 
     public static final String EXTRA_INDEX = "com.example.james.jcook_subbook.INDEX";
+    public static final String EXTRA_DEL = "com.example.james.jcook_subbook.DEL";
     public static final String EXTRA_NAME = "com.example.james.jcook_subbook.NAME";
     public static final String EXTRA_DATE = "com.example.james.jcook_subbook.DATE";
     public static final String EXTRA_COST = "com.example.james.jcook_subbook.COST";
@@ -198,20 +199,30 @@ public class SubBookMainActivity extends AppCompatActivity {
                     //Get info from bundle
                     Bundle bundle = data.getExtras();
                     int subIndex = bundle.getInt(EXTRA_INDEX);
-                    String subName = bundle.getString(EXTRA_NAME);
-                    Long timeInMilli = bundle.getLong(EXTRA_DATE);
-                    Date subDate = new Date(timeInMilli);
-                    float subCost = bundle.getFloat(EXTRA_COST);
-                    String subComment = bundle.getString(EXTRA_COMMENT);
+                    boolean delete = bundle.getBoolean(EXTRA_DEL);
 
-                    BasicSubscription sub = new BasicSubscription(subName, subDate,
-                                                                  subCost, subComment);
-                    //if subIndex is less than the sub size, it previously
-                    // existed and needs to be deleted before being updated.
-                    if (subIndex < sublist.size()){
-                        sublist.remove(subIndex);
+                    //If delete flag is there, delete sub in sublist
+                    if (delete){
+                        if (subIndex < sublist.size()){
+                            sublist.remove(subIndex);
+                        }
                     }
-                    sublist.add(subIndex, sub);
+                    else{
+                        String subName = bundle.getString(EXTRA_NAME);
+                        Long timeInMilli = bundle.getLong(EXTRA_DATE);
+                        Date subDate = new Date(timeInMilli);
+                        float subCost = bundle.getFloat(EXTRA_COST);
+                        String subComment = bundle.getString(EXTRA_COMMENT);
+
+                        BasicSubscription sub = new BasicSubscription(subName, subDate,
+                                subCost, subComment);
+                        //if subIndex is less than the sub size, it previously
+                        // existed and needs to be deleted before being updated.
+                        if (subIndex < sublist.size()){
+                            sublist.remove(subIndex);
+                        }
+                        sublist.add(subIndex, sub);
+                    }
                     adapter.notifyDataSetChanged();
                     saveInFile();
                 }

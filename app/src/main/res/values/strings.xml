@@ -11,4 +11,5 @@
     <string name="total_cost_num">0</string>
     <string name="default_date">2017-05-05</string>
     <string name="delete_all_subs">Delete All Subscriptions</string>
+    <string name="delete_sub">Delete Subscription</string>
 </resources>
