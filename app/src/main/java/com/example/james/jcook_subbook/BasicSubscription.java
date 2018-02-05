@@ -139,7 +139,7 @@ public class BasicSubscription {
      */
     @Override
     public String toString(){
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         return this.name
                 + ", Date: " + dateFormatter.format(this.date)
                 + ", Cost: " + String.valueOf(this.cost);

@@ -21,39 +21,13 @@
         app:layout_constraintStart_toEndOf="@+id/DescribeSub"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/SubDate"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="date"
-        android:text="@string/default_date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SubName" />
-
-    <EditText
-        android:id="@+id/SubCost"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="@string/total_cost_num"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SubDate" />
-
     <TextView
         android:id="@+id/DescribeCost"
         android:layout_width="140dp"
         android:layout_height="45dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/cost"
-        app:layout_constraintEnd_toStartOf="@+id/SubCost"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DescribeDate" />
 
@@ -61,11 +35,9 @@
         android:id="@+id/DescribeDate"
         android:layout_width="140dp"
         android:layout_height="45dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/date"
-        app:layout_constraintEnd_toStartOf="@+id/SubDate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DescribeSub" />
 
@@ -130,5 +102,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveButton" />
+
+    <TextView
+        android:id="@+id/SubDate"
+        android:layout_width="218dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/default_date"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/DescribeDate"
+        app:layout_constraintTop_toBottomOf="@+id/SubName" />
+
+    <EditText
+        android:id="@+id/SubCost"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/DescribeComment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/DescribeCost"
+        app:layout_constraintTop_toBottomOf="@+id/SubDate" />
 
 </android.support.constraint.ConstraintLayout>
